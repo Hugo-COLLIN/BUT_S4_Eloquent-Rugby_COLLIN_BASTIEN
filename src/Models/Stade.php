@@ -1,11 +1,18 @@
 <?php
+declare(strict_types=1);
 
-namespace rugby\Models;
+namespace rugby\models;
 
-use Illuminate\Database\Eloquent\Model as Model;
+use \Illuminate\Database\Eloquent as Eloq;
 
-class Stade extends Model{
-    public $table = 'stade';
-    public $primaryKey = 'numStade';
+class Stade extends Eloq\Model
+{
+    protected $table = 'stade';
+    protected $primaryKey = 'numStade';
     public $timestamps = false;
+
+    public function match(): Eloq\Relations\HasMany
+    {
+        return $this->hasMany("rugby\models\Match", "numStade");
+    }
 }

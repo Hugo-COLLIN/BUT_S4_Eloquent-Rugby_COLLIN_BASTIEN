@@ -1,16 +1,22 @@
 <?php
+declare(strict_types=1);
 
-namespace rugby\Models;
+namespace rugby\models;
 
-use Illuminate\Database\Eloquent\Model as Model;
+use \Illuminate\Database\Eloquent as Eloq;
 
-class Poste extends Model{
-    public $table = 'poste';
-    public $primaryKey = 'numero';
+class Poste extends Eloq\Model
+{
+    protected $table = 'poste';
+    protected $primaryKey = 'numero';
     public $timestamps = false;
 
-
-    public function association() : mixed{
+    public function association() : mixed {
         return $this->hasMany('rugby\Models\Joueur', 'numPoste',$this->primaryKey);
+    }
+
+    public function joueur(): Eloq\Relations\HasMany
+    {
+        return $this->hasMany("rugby\models\Joueur", "numero");
     }
 }
