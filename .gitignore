@@ -1,18 +1,10 @@
-#intelliJ
-.idea
-/.idea
-.out
-out
-.target
-*.iml
-
-# Ini files
-*.ini
-
 # No-extension files
 *
 !*/
 !*.*
+
+# Ini files
+*.ini
 
 #Mac
 Thumbs.db
@@ -50,11 +42,9 @@ composer.lock
 composer.json
 
 
-/.idea/.gitignore
-/.idea/misc.xml
-/.idea/modules.xml
-/.idea/php.xml
-/.idea/inspectionProfiles/Project_Default.xml
-/.idea/S4_Eloquent.iml
-/.idea/symfony2.xml
-/.idea/vcs.xml
+#intelliJ
+*.iml
+.out
+out
+.target
+/.idea/
