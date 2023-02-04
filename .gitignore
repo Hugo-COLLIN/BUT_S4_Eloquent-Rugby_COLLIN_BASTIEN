@@ -48,3 +48,4 @@ composer.json
 out
 .target
 /.idea/
+/composer-setup.php
