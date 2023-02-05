@@ -18,7 +18,7 @@ class Joueur extends Eloq\Model
 
     public function poste(): Eloq\Relations\BelongsTo
     {
-        return $this->belongsTo("rugby\models\Poste", "numPoste");
+        return $this->belongsTo("rugby\models\Poste", "numPoste", "numero");
     }
 
     public function jouerMatch(): Eloq\Relations\BelongsToMany

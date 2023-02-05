@@ -14,11 +14,21 @@ $db->bootEloquent();
 //QUESTION EN COURS
 echo "<h1>QUESTION EN COURS</h1>";
 
-//question 4-f
-echo "<h2>Question 4.g</h2>";
 
 
 echo "<br><hr>";
+
+//$qg = \rugby\Models\Joueur::all();
+
+/*
+foreach ($qg as $item => $value){
+    foreach ($value as $att => $val){
+        echo $value->$att . " ";
+    }
+    echo "</br>";
+    //echo "{$value->numJoueur} {$value->prenom} {$value->nom} {$value->numPoste} {$value->numEquipe} </br>";
+}
+*/
 
 echo "<h1>Etude de Cas Eloquent Rugby</h1>";
 
@@ -110,4 +120,19 @@ foreach ($qf as $item)
     echo $item->libelle . "</br>";
 }
 
+//question 4-g
+echo "<h2>Question 4.g</h2>";
 
+$qg = \rugby\Models\Joueur::join('poste', 'joueur.numPoste', '=', 'poste.numero')
+    ->get();
+
+/*
+$qg = \rugby\Models\Joueur::select('*')->poste()
+    ->get();*/
+
+foreach ($qg as $value){
+    echo "{$value->prenom} {$value->nom} {$value->numPoste} {$value->numEquipe} {$value->libelle} </br>";
+}
+
+//question 4-h
+echo "<h2>Question 4.h</h2>";
