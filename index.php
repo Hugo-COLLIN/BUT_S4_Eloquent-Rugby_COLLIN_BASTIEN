@@ -14,7 +14,8 @@ $db->bootEloquent();
 //QUESTION EN COURS
 echo "<h1>QUESTION EN COURS</h1>";
 
-echo "<h2>Question 4.i</h2>";
+echo "<h2>Question 4.k</h2>";
+
 
 
 
@@ -174,3 +175,16 @@ foreach ($qi as $value) {
 }
 
 //question 4-j
+echo "<h2>Question 4.j</h2>";
+
+$qj = \rugby\Models\Arbitre::where('nomArbitre', '=', 'Wayne Barnes')
+    ->first()
+    ->arbitrerMatchs()
+    ->get();
+
+foreach ($qj as $item){
+    $res = $item->equipe_recoit()->first();
+    echo "{$res->id} {$res->codeEquipe} {$res->pays} {$res->couleur} {$res->entraineur} </br>";
+}
+
+//question 4-k
