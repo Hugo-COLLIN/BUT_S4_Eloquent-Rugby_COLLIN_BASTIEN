@@ -11,7 +11,7 @@ class Joueur extends Eloq\Model
     protected $primaryKey = 'numJoueur';
     public $timestamps = false;
 
-    public function joueur(): Eloq\Relations\BelongsTo
+    public function equipe(): Eloq\Relations\BelongsTo
     {
         return $this->belongsTo("rugby\models\Equipe", "codeEquipe");
     }

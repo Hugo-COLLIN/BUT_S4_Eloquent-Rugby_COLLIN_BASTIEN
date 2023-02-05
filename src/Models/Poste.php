@@ -11,12 +11,7 @@ class Poste extends Eloq\Model
     protected $primaryKey = 'numero';
     public $timestamps = false;
 
-    public function association() : mixed {
+    public function joueur() : Eloq\Relations\HasMany {
         return $this->hasMany('rugby\Models\Joueur', 'numPoste',$this->primaryKey);
-    }
-
-    public function joueur(): Eloq\Relations\HasMany
-    {
-        return $this->hasMany("rugby\models\Joueur", "numero");
     }
 }
