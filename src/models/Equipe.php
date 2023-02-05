@@ -13,7 +13,7 @@ class Equipe extends Eloq\Model
 
     public function joueur(): Eloq\Relations\HasMany
     {
-        return $this->hasMany("rugby\models\Joueur", "codeEquipe");
+        return $this->hasMany("rugby\models\Joueur", "numEquipe");
     }
 
     public function matchRecoit(): Eloq\Relations\HasMany

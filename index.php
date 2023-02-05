@@ -14,8 +14,7 @@ $db->bootEloquent();
 //QUESTION EN COURS
 echo "<h1>QUESTION EN COURS</h1>";
 
-echo "<h2>Question 4.k</h2>";
-
+echo "<h2>Question 4.l</h2>";
 
 
 
@@ -188,3 +187,53 @@ foreach ($qj as $item){
 }
 
 //question 4-k
+echo "<h2>Question 4.k</h2>";
+//1
+$equipe = \rugby\Models\Equipe::where('pays', '=', "Nouvelle-Zelande")
+    ->first();
+
+//2
+$matchD = \rugby\Models\Matchs::where([
+    ['dateMatch', '=', '2007-09-23'],
+    ['numEquipeD', '=', $equipe->id]
+])
+    ->get();
+//echo $equipe->id . " ";
+
+//3
+foreach ($matchD as $m){
+    $res = $m->jouerJoueur()
+        ->where('numEquipe', '=', $equipe->id)
+        ->get();
+    foreach ($res as $r){
+        echo "{$r->prenom} {$r->nom} {$r->numEquipe} </br>";
+    }
+    //echo "{$m->numMatch} {$m->dateMatch} {$m->numEquipeD} {$m->numEquipeV} {$m->numStade} {$m->numArbitre} </br>";
+}
+
+/*$qk = \rugby\Models\Equipe::where('pays', '=', "Nouvelle-Zelande")
+    ->first()
+    ->joueur()
+    ->get();*/
+
+
+
+//echo $qk->joueur()->get();
+
+
+
+/*
+foreach ($qk as $item){
+    echo "{$item->numJoueur}. {$item->prenom} {$item->nom} {$item->numPoste} {$item->numEquipe} </br>";
+}
+*/
+
+/*
+$qk = \rugby\Models\Joueur::where('numEquipe', '=', $equipe->id)/*
+    ->first()
+    ->jouerMatchs()*/
+//->get();
+
+
+//question 4-l
+echo "<h2>Question 4.l</h2>";
