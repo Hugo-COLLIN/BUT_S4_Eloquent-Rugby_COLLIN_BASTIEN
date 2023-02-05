@@ -14,21 +14,9 @@ $db->bootEloquent();
 //QUESTION EN COURS
 echo "<h1>QUESTION EN COURS</h1>";
 
-echo "<h2>Question 4.h</h2>";
-//\rugby\Models\Stade::where('numStade', 1)->update(['ville' => 'Paris']);
-$qh = \rugby\Models\Stade::where('nomStade', "Stade de France")->first();
-
-echo "{$qh->numStade} {$qh->nomStade}</br>";
-
-/*
-foreach ($qh as $value){
-    echo "{$value->numStade} {$value->nomStade}</br>";
-}*/
+echo "<h2>Question 4.i</h2>";
 
 
-DB::table('matchs')->insert([
-    ['dateMatch' => '2022-12-12', 'numStade' => $qh->numStade]
-]);
 
 echo "<br><hr>";
 
@@ -120,6 +108,7 @@ foreach ($qe as $item){
     echo "{$item->numJoueur}. {$item->prenom} {$item->nom} {$item->numPoste} {$item->numEquipe} </br>";
 }
 
+//question 4-f
 echo "<h2>Question 4.f</h2>";
 
 $qf = \rugby\Models\Joueur::where('nom', '=', 'Woodcock')
@@ -152,6 +141,36 @@ foreach ($qg as $value){
 echo "<h2>Question 4.h</h2>";
 $qh = new \rugby\models\Matchs();
 $qh->dateMatch = 2022-12-12;
-$qh->numStade =\rugby\models\Stade::select("numStade")
-                    ->where("ville","=","Paris");
+$qh->numStade =\rugby\models\Stade::where("nomStade","=","Stade de France")
+                    ->first()
+                    ->numStade;
+$qh->numEquipeR = \rugby\models\Equipe::where("pays","=","France")
+                    ->first()
+                    ->numEquipe;
+$qh->scoreR = 10;
+$qh->nbEssaisR = 2;
+$qh->numEquipeD = \rugby\models\Equipe::where("pays","=","Angleterre")
+                    ->first()
+                    ->numEquipe;
+$qh->scoreD = 5;
+$qh->nbEssaisD = 1;
+
 $qh->save();
+
+//question 4-i
+echo "<h2>Question 4.i</h2>";
+
+
+$qi = \rugby\Models\Arbitre::where('nomArbitre', '=', 'Marius Jonker')
+    ->first()
+    ->arbitrerMatchs()
+    ->get();
+
+foreach ($qi as $value) {
+    $nStade = \rugby\models\Stade::select("nomStade")
+        ->where("numStade","=",$value->numStade)
+        ->first();
+    echo "{$value->numMatch} {$value->dateMatch} $nStade->nomStade</br>";
+}
+
+//question 4-j

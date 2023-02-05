@@ -11,8 +11,8 @@ class Arbitre extends Eloq\Model
     protected $primaryKey = 'numArbitre';
     public $timestamps = false;
 
-    public function arbitrerMatch(): Eloq\Relations\BelongsToMany
+    public function arbitrerMatchs(): Eloq\Relations\BelongsToMany
     {
-        return $this->belongsToMany("rugby\models\Match", "rugby\models\Arbitrer", "numArbitre", "numMatch");
+        return $this->belongsToMany("rugby\models\Matchs", "rugby\models\Arbitrer", "numArbitre", "numMatch");
     }
 }
