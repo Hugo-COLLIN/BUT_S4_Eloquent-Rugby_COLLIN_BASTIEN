@@ -136,3 +136,8 @@ foreach ($qg as $value){
 
 //question 4-h
 echo "<h2>Question 4.h</h2>";
+$qh = new \rugby\models\Matchs();
+$qh->dateMatch = 2022-12-12;
+$qh->numStade =\rugby\models\Stade::select("numStade")
+                    ->where("ville","=","Paris");
+$qh->save();
