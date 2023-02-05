@@ -14,7 +14,21 @@ $db->bootEloquent();
 //QUESTION EN COURS
 echo "<h1>QUESTION EN COURS</h1>";
 
+echo "<h2>Question 4.h</h2>";
+//\rugby\Models\Stade::where('numStade', 1)->update(['ville' => 'Paris']);
+$qh = \rugby\Models\Stade::where('nomStade', "Stade de France")->first();
 
+echo "{$qh->numStade} {$qh->nomStade}</br>";
+
+/*
+foreach ($qh as $value){
+    echo "{$value->numStade} {$value->nomStade}</br>";
+}*/
+
+
+DB::table('matchs')->insert([
+    ['dateMatch' => '2022-12-12', 'numStade' => $qh->numStade]
+]);
 
 echo "<br><hr>";
 
