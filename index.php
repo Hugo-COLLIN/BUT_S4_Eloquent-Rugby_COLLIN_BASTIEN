@@ -251,7 +251,6 @@ $matchs = \rugby\Models\Matchs::where([
 //3
 foreach ($matchs as $match) {
     $res = $match->jouerJoueur()
-        //->where('numEquipe', '=', $equipe->id)
         ->get();
     foreach ($res as $r){
         echo "{$r->prenom} {$r->nom} {$r->numEquipe} </br>";
@@ -269,7 +268,6 @@ $qn1 = \rugby\Models\Joueur::where('numEquipe', '=', $equipeFr->id)
 $qn2 = \rugby\Models\Joueur::where('numEquipe', '=', $equipeFr->id)
     ->join('jouer', 'jouer.numJoueur', '=', 'joueur.numJoueur')
     ->join('matchs', 'matchs.numMatch', '=', 'jouer.numMatch')
-    /*->jouerMatch()*/ //erreur non-résolue
     ->get();
 
 $qn = $qn1->diff($qn2);
