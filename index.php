@@ -13,10 +13,10 @@ $db->bootEloquent();
 
 //QUESTION EN COURS
 echo "<h1>QUESTION EN COURS</h1>";
+$equipeNz = \rugby\Models\Equipe::where('pays', '=', "Nouvelle-Zelande")
+    ->first();
 
-echo "<h2>Question 4.m</h2>";
-//ne pas prendre la ligne suivante
-
+echo "<h2>Question 4.l</h2>";
 
 
 
@@ -262,17 +262,23 @@ $qk = \rugby\Models\Joueur::where('numEquipe', '=', $equipe->id)/*
 
 //question 4-l
 echo "<h2>Question 4.l</h2>";
-$ql = \rugby\models\Joueur::where('pays', '=', "Nouvelle-Zelande")
-                            ->get();
+//on réutilise $equipeNz de la question 4k contenant l'id de l'équipe Néo-Zelandaise
+//2
+$match = \rugby\Models\Matchs::get();
 
-$ql =
-
-
-foreach ($ql as $item ){
-    if ($item->pivot->titulaire == 0){
-        echo $item->prenom . ' ' . $item->nom;
+//3
+foreach ($match as $m){
+    $res = $m
+        ->jouerJoueur()
+        ->distinct()
+        ->where([
+            ['numEquipe', '=', $equipeNz->id],
+            ['titulaire', '=', 0]
+        ])
+        ->get();
+    foreach ($res as $r){
+        echo "{$r->prenom} {$r->nom} {$r->numEquipe} </br>";
     }
-
 }
 
 
