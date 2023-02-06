@@ -14,7 +14,9 @@ $db->bootEloquent();
 //QUESTION EN COURS
 echo "<h1>QUESTION EN COURS</h1>";
 
-echo "<h2>Question 4.l</h2>";
+echo "<h2>Question 4.m</h2>";
+//ne pas prendre la ligne suivante
+
 
 
 
@@ -189,19 +191,19 @@ foreach ($qj as $item){
 //question 4-k
 echo "<h2>Question 4.k</h2>";
 //1
-$equipe = \rugby\Models\Equipe::where('pays', '=', "Nouvelle-Zelande")
+$equipeNz = \rugby\Models\Equipe::where('pays', '=', "Nouvelle-Zelande")
     ->first();
 
 //2
 $matchD = \rugby\Models\Matchs::where([
     ['dateMatch', '=', '2007-09-23'],
-    ['numEquipeD', '=', $equipe->id]
+    ['numEquipeD', '=', $equipeNz->id]
 ])
     ->get();
 
 $matchR = \rugby\Models\Matchs::where([
     ['dateMatch', '=', '2007-09-23'],
-    ['numEquipeR', '=', $equipe->id]
+    ['numEquipeR', '=', $equipeNz->id]
 ])
     ->get();
 
@@ -218,8 +220,8 @@ function afficherJoueur4k($match, $equipe){
     }
 }
 
-afficherJoueur4k($matchD, $equipe);
-afficherJoueur4k($matchR, $equipe);
+afficherJoueur4k($matchD, $equipeNz);
+afficherJoueur4k($matchR, $equipeNz);
 
 /*
 foreach ($matchD as $m){
@@ -260,3 +262,45 @@ $qk = \rugby\Models\Joueur::where('numEquipe', '=', $equipe->id)/*
 
 //question 4-l
 echo "<h2>Question 4.l</h2>";
+
+
+//question 4-m
+echo "<h2>Question 4.m</h2>";
+echo "<h4>Les matchs de l'équipe Néo-Zelandaise contre l'Italie ou le Portugal</h4>";
+//on réutilise $equipeNz de la question 4k contenant l'id de l'équipe Néo-Zelandaise
+//1
+$equipeIt = \rugby\Models\Equipe::where('pays', '=', "Italie")
+    ->first();
+
+$equipePg = \rugby\Models\Equipe::where('pays', '=', "Portugal")
+    ->first();
+
+//2
+$matchs = \rugby\Models\Matchs::where([
+    ['numEquipeD', '=', $equipeNz->id],
+    ['numEquipeR', '=', $equipeIt->id]
+])
+    ->orWhere([
+        ['numEquipeD', '=', $equipeIt->id],
+        ['numEquipeR', '=', $equipeNz->id]
+    ])
+    ->orWhere([
+        ['numEquipeD', '=', $equipeNz->id],
+        ['numEquipeR', '=', $equipePg->id]
+    ])
+    ->orWhere([
+        ['numEquipeD', '=', $equipePg->id],
+        ['numEquipeR', '=', $equipeNz->id]
+    ])
+    ->get();
+
+//3
+foreach ($matchs as $match) {
+    $res = $match->jouerJoueur()
+        //->where('numEquipe', '=', $equipe->id)
+        ->get();
+    foreach ($res as $r){
+        echo "{$r->prenom} {$r->nom} {$r->numEquipe} </br>";
+    }
+    //echo "{$match->numMatch} {$match->dateMatch} {$match->numEquipeD} {$match->numEquipeR} {$match->numStade} </br>";
+}
