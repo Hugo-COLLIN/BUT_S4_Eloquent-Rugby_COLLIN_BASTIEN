@@ -23,7 +23,7 @@ class Joueur extends Eloq\Model
 
     public function jouerMatch(): Eloq\Relations\BelongsToMany
     {
-        return $this->belongsToMany("rugby\models\Match", "jouer", "numJoueur", "numMatch")
+        return $this->belongsToMany("rugby\models\Match", "rugby\models\Jouer", "numJoueur", "numMatch")
                     ->withPivot(['titulaire','tpsJeu','nbPoint', 'nbEssais']);
     }
 }

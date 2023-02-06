@@ -13,12 +13,24 @@ $db->bootEloquent();
 
 //QUESTION EN COURS
 echo "<h1>QUESTION EN COURS</h1>";
-$equipeNz = \rugby\Models\Equipe::where('pays', '=', "Nouvelle-Zelande")
-    ->first();
-
-echo "<h2>Question 4.l</h2>";
 
 
+/*
+//3
+foreach ($match as $m){
+    $res = $m
+        ->jouerJoueur()
+        ->distinct()
+        ->where([
+            ['numEquipe', '=', $equipeNz->id],
+            ['titulaire', '=', 0]
+        ])
+        ->get();
+    foreach ($res as $r){
+        echo "{$r->prenom} {$r->nom} {$r->numEquipe} </br>";
+    }
+}
+*/
 
 echo "<br><hr>";
 
@@ -321,4 +333,24 @@ foreach ($matchs as $match) {
         echo "{$r->prenom} {$r->nom} {$r->numEquipe} </br>";
     }
     //echo "{$match->numMatch} {$match->dateMatch} {$match->numEquipeD} {$match->numEquipeR} {$match->numStade} </br>";
+}
+
+//question 4-n
+echo "<h2>Question 4.n</h2>";
+$equipeFr = \rugby\Models\Equipe::where('pays', '=', "France")
+    ->first();
+
+$qn1 = \rugby\Models\Joueur::where('numEquipe', '=', $equipeFr->id)
+    ->get();
+
+$qn2 = \rugby\Models\Joueur::where('numEquipe', '=', $equipeFr->id)
+    ->join('jouer', 'jouer.numJoueur', '=', 'joueur.numJoueur')
+    ->join('matchs', 'matchs.numMatch', '=', 'jouer.numMatch')
+    /*->jouerMatch()*/ //erreur non-résolue
+    ->get();
+
+$qn = $qn1->diff($qn2);
+
+foreach ($qn as $value) {
+    echo "{$value->nom} {$value->prenom} {$value->numEquipe} </br>";
 }
