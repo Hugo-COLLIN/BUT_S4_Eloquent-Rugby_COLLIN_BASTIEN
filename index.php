@@ -275,7 +275,7 @@ $qn2 = \rugby\Models\Joueur::where('numEquipe', '=', $equipeFr->id)
 $qn = $qn1->diff($qn2);
 
 foreach ($qn as $value) {
-    echo "{$value->nom} {$value->prenom} {$value->numEquipe} </br>";
+    echo "{$value->nom} {$value->prenom} </br>";
 }
 
 //question 4-o
