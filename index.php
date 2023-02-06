@@ -198,9 +198,30 @@ $matchD = \rugby\Models\Matchs::where([
     ['numEquipeD', '=', $equipe->id]
 ])
     ->get();
-//echo $equipe->id . " ";
+
+$matchR = \rugby\Models\Matchs::where([
+    ['dateMatch', '=', '2007-09-23'],
+    ['numEquipeR', '=', $equipe->id]
+])
+    ->get();
 
 //3
+function afficherJoueur4k($match, $equipe){
+    foreach ($match as $m){
+        $res = $m->jouerJoueur()
+            ->where('numEquipe', '=', $equipe->id)
+            ->get();
+        foreach ($res as $r){
+            echo "{$r->prenom} {$r->nom} {$r->numEquipe} </br>";
+        }
+        //echo "{$m->numMatch} {$m->dateMatch} {$m->numEquipeD} {$m->numEquipeV} {$m->numStade} {$m->numArbitre} </br>";
+    }
+}
+
+afficherJoueur4k($matchD, $equipe);
+afficherJoueur4k($matchR, $equipe);
+
+/*
 foreach ($matchD as $m){
     $res = $m->jouerJoueur()
         ->where('numEquipe', '=', $equipe->id)
@@ -210,6 +231,8 @@ foreach ($matchD as $m){
     }
     //echo "{$m->numMatch} {$m->dateMatch} {$m->numEquipeD} {$m->numEquipeV} {$m->numStade} {$m->numArbitre} </br>";
 }
+*/
+
 
 /*$qk = \rugby\Models\Equipe::where('pays', '=', "Nouvelle-Zelande")
     ->first()
