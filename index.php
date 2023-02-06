@@ -131,6 +131,7 @@ $qh->scoreD = 5;
 $qh->nbEssaisD = 1;
 
 $qh->save();
+echo "Match ajouté";
 
 //question 4-i
 echo "<h2>Question 4.i</h2>";
