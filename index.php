@@ -262,6 +262,18 @@ $qk = \rugby\Models\Joueur::where('numEquipe', '=', $equipe->id)/*
 
 //question 4-l
 echo "<h2>Question 4.l</h2>";
+$ql = \rugby\models\Joueur::where('pays', '=', "Nouvelle-Zelande")
+                            ->get();
+
+$ql =
+
+
+foreach ($ql as $item ){
+    if ($item->pivot->titulaire == 0){
+        echo $item->prenom . ' ' . $item->nom;
+    }
+
+}
 
 
 //question 4-m
