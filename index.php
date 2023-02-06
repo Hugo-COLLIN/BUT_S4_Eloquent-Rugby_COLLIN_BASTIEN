@@ -11,40 +11,6 @@ $db->addConnection(parse_ini_file('./src/conf/conf.ini'));
 $db->setAsGlobal();
 $db->bootEloquent();
 
-//QUESTION EN COURS
-echo "<h1>QUESTION EN COURS</h1>";
-
-
-/*
-//3
-foreach ($match as $m){
-    $res = $m
-        ->jouerJoueur()
-        ->distinct()
-        ->where([
-            ['numEquipe', '=', $equipeNz->id],
-            ['titulaire', '=', 0]
-        ])
-        ->get();
-    foreach ($res as $r){
-        echo "{$r->prenom} {$r->nom} {$r->numEquipe} </br>";
-    }
-}
-*/
-
-echo "<br><hr>";
-
-//$qg = \rugby\Models\Joueur::all();
-
-/*
-foreach ($qg as $item => $value){
-    foreach ($value as $att => $val){
-        echo $value->$att . " ";
-    }
-    echo "</br>";
-    //echo "{$value->numJoueur} {$value->prenom} {$value->nom} {$value->numPoste} {$value->numEquipe} </br>";
-}
-*/
 
 echo "<h1>Etude de Cas Eloquent Rugby</h1>";
 
@@ -90,7 +56,7 @@ foreach ($qa as $item){
 echo "<h2>Question 4.b</h2>";
 
 echo "<h4>Les Matchs du 2007-09-22 avec un score de plus de 30</h4>";
-$qb = matchs::where('dateMatch', '=', '2007-09-22', 'and', 'scoreR','>', 31, 'or', 'scoreD','>', 31)
+$qb = matchs::where('dateMatch', '=', '2007-09-22', 'and', 'scoreR','>', 30, 'or', 'scoreD','>', 30)
               ->get();
 foreach ($qb as $item){
     echo "{$item->numMatch}. date : {$item->dateMatch} nbSpec : {$item->nbSpect} stade : {$item->numStade} equipeR : {$item->numEquipeR} score: {$item->scoreR} nbessai: {$item->nbEssaisR} equipeD: {$item->numEquipeD} score: {$item->scoreD} score: {$item->nbEssaisD} </br>";
@@ -130,7 +96,6 @@ $qf = \rugby\Models\Joueur::where('nom', '=', 'Woodcock')
     ->poste()
     ->get();
 
-//$qf = \rugby\Models\Poste::joueur()->get();
 
 foreach ($qf as $item)
 {
@@ -142,10 +107,6 @@ echo "<h2>Question 4.g</h2>";
 
 $qg = \rugby\Models\Joueur::join('poste', 'joueur.numPoste', '=', 'poste.numero')
     ->get();
-
-/*
-$qg = \rugby\Models\Joueur::select('*')->poste()
-    ->get();*/
 
 foreach ($qg as $value){
     echo "{$value->prenom} {$value->nom} {$value->numPoste} {$value->numEquipe} {$value->libelle} </br>";
@@ -173,7 +134,6 @@ $qh->save();
 
 //question 4-i
 echo "<h2>Question 4.i</h2>";
-
 
 $qi = \rugby\Models\Arbitre::where('nomArbitre', '=', 'Marius Jonker')
     ->first()
@@ -228,48 +188,11 @@ function afficherJoueur4k($match, $equipe){
         foreach ($res as $r){
             echo "{$r->prenom} {$r->nom} {$r->numEquipe} </br>";
         }
-        //echo "{$m->numMatch} {$m->dateMatch} {$m->numEquipeD} {$m->numEquipeV} {$m->numStade} {$m->numArbitre} </br>";
     }
 }
 
 afficherJoueur4k($matchD, $equipeNz);
 afficherJoueur4k($matchR, $equipeNz);
-
-/*
-foreach ($matchD as $m){
-    $res = $m->jouerJoueur()
-        ->where('numEquipe', '=', $equipe->id)
-        ->get();
-    foreach ($res as $r){
-        echo "{$r->prenom} {$r->nom} {$r->numEquipe} </br>";
-    }
-    //echo "{$m->numMatch} {$m->dateMatch} {$m->numEquipeD} {$m->numEquipeV} {$m->numStade} {$m->numArbitre} </br>";
-}
-*/
-
-
-/*$qk = \rugby\Models\Equipe::where('pays', '=', "Nouvelle-Zelande")
-    ->first()
-    ->joueur()
-    ->get();*/
-
-
-
-//echo $qk->joueur()->get();
-
-
-
-/*
-foreach ($qk as $item){
-    echo "{$item->numJoueur}. {$item->prenom} {$item->nom} {$item->numPoste} {$item->numEquipe} </br>";
-}
-*/
-
-/*
-$qk = \rugby\Models\Joueur::where('numEquipe', '=', $equipe->id)/*
-    ->first()
-    ->jouerMatchs()*/
-//->get();
 
 
 //question 4-l
@@ -332,7 +255,6 @@ foreach ($matchs as $match) {
     foreach ($res as $r){
         echo "{$r->prenom} {$r->nom} {$r->numEquipe} </br>";
     }
-    //echo "{$match->numMatch} {$match->dateMatch} {$match->numEquipeD} {$match->numEquipeR} {$match->numStade} </br>";
 }
 
 //question 4-n
@@ -354,3 +276,6 @@ $qn = $qn1->diff($qn2);
 foreach ($qn as $value) {
     echo "{$value->nom} {$value->prenom} {$value->numEquipe} </br>";
 }
+
+//question 4-o
+echo "<h2>Question 4.o</h2>";
